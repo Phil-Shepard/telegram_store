@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.naumen.telegram_store.domains.Product;
 import ru.naumen.telegram_store.domains.message.MessageToUser;
 import ru.naumen.telegram_store.repositories.ProductListRepository;
+import ru.naumen.telegram_store.services.ProductListService;
 import ru.naumen.telegram_store.services.ProductService;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import static ru.naumen.telegram_store.bot.Constants.*;
 public class BotMessageCreator {
     private final ProductService productService;
     private final ProductListRepository productListRepository;
+    private final ProductListService productListService;
 
     /**
      * Создается сообщение для пользователя с текстом приветствия и списком возможных команд бота.
@@ -74,17 +76,18 @@ public class BotMessageCreator {
         String answer = "Продукт добавлен";
         return new MessageToUser(chatId, answer, "false");
     }
-//
-//    public MessageToUser createMessageListProducts(Long chatId) throws IOException {
-//        ArrayList<Long> recipeIds = productListRepository.getAddNumbersRecipes(chatId);
-//        String answer = "";
-//        for (Long recipeId : recipeIds) {
-//            Product product = productService.getRecipeById(recipeId).get();
-//            answer += "Имя: " + product.getName() + "\n"
-//                    + "Описание: " +  new String(product.getDescription(), StandardCharsets.UTF_8) + "\n"
-//                    + "Ингридиенты: " + new String(product.getIngredients(), StandardCharsets.UTF_8) + "\n"
-//                    + "\n";
-//        }
-//        return new MessageToUser(chatId, answer, "false");
-//    }
+
+    public MessageToUser createMessageListProducts(Long chatId) throws IOException {
+        ArrayList<Long> productNumbers = productListService.getAddNumbersProducts(chatId);
+        String answer = "";
+        for (Long productNumber : productNumbers) {
+            Product product = productService.getProductById(productNumber).get();
+            answer += "Имя: " + product.getName() + "\n"
+                    + "Описание: " +  new String(product.getDescription(), StandardCharsets.UTF_8) + "\n"
+                    + "Цена: " + product.getPrice()
+                    + "\n"
+            + "\n";
+        }
+        return new MessageToUser(chatId, answer, "false");
+    }
 }

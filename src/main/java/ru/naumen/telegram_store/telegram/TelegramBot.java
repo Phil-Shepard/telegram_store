@@ -35,8 +35,8 @@ public class TelegramBot extends TelegramLongPollingBot implements Bot {
         this.productService = productService;
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start", "Это телеграмм бот товаров."));
-        listOfCommands.add(new BotCommand("/recipes", "Перейти в каталог товаров."));
-        listOfCommands.add(new BotCommand("/recipes_list", "Вывести список добавленнх товаров"));
+        listOfCommands.add(new BotCommand("/products", "Перейти в каталог товаров."));
+        listOfCommands.add(new BotCommand("/products_list", "Вывести список добавленнх товаров"));
         listOfCommands.add(new BotCommand("/delete", "Очистить корзину"));
         listOfCommands.add(new BotCommand("/exit", "Выйти из каталога товаров"));
         listOfCommands.add(new BotCommand("/help", "Справка"));
@@ -139,7 +139,7 @@ public class TelegramBot extends TelegramLongPollingBot implements Bot {
         sendMessage.setChatId(messageToUser.getChatId());
         if (messageToUser.getText() != null) sendMessage.setText(messageToUser.getText());
         if (messageToUser.getInlineKeyboardMarkup().equals("products")) sendMessage.setReplyMarkup(getKeyBoardAllProducts());
-//        if (messageToUser.getInlineKeyboardMarkup().equals("add")) sendMessage.setReplyMarkup(AddButton(messageToUser.getCallBackRecipeId()));
+        if (messageToUser.getInlineKeyboardMarkup().equals("add")) sendMessage.setReplyMarkup(AddButton(messageToUser.getCallBackProductId()));
         return sendMessage;
     }
 

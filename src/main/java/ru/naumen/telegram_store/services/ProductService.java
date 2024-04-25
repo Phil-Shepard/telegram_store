@@ -19,6 +19,15 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    public String getProductNameById(Long id) {
+        return productRepository.findById(id).get().getName();
+    }
+
+    public Long getProductPriceById(Long id) {
+        return productRepository.findById(id).get().getPrice();
+    }
+
+
     public void AddProducts() {
         List<Product> products = Arrays.asList(
                 new Product("Сметана", "вкусная сметана".getBytes(), Long.valueOf(123), Long.valueOf(2)),
@@ -26,7 +35,7 @@ public class ProductService {
                 new Product("Чай", "вкусный чай".getBytes(), Long.valueOf(6546), Long.valueOf(312)),
                 new Product("Горох", "вкусный горох".getBytes(), Long.valueOf(213132), Long.valueOf(312132)),
                 new Product("Помидоры", "вкусные помидоры".getBytes(), Long.valueOf(342), Long.valueOf(31212)),
-                new Product("Огурцы", "вкусные огурцы сметана".getBytes(), Long.valueOf(43), Long.valueOf(25))
+                new Product("Огурцы", "вкусные огурцы".getBytes(), Long.valueOf(43), Long.valueOf(25))
         );
         productRepository.saveAll(products);
 

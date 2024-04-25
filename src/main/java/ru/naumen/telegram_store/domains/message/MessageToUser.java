@@ -1,7 +1,6 @@
 package ru.naumen.telegram_store.domains.message;
 
 import lombok.Getter;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 public class MessageToUser {
 
@@ -12,20 +11,20 @@ public class MessageToUser {
     @Getter
     private final String inlineKeyboardMarkup;
     @Getter
-    private final Long callBackRecipeId;
+    private final Long callBackProductId;
 
     public MessageToUser(long chatId, String text, String inlineKeyboardMarkup) {
         this.chatId = chatId;
         this.text = text;
         this.inlineKeyboardMarkup = inlineKeyboardMarkup;
-        this.callBackRecipeId = null;
+        this.callBackProductId = null;
     }
 
-    public MessageToUser(long chatId, String text, String inlineKeyboardMarkup, Long callBackRecipeId) {
+    public MessageToUser(long chatId, String text, String inlineKeyboardMarkup, Long callBackProductId) {
         this.chatId = chatId;
         this.text = text;
         this.inlineKeyboardMarkup = inlineKeyboardMarkup;
-        this.callBackRecipeId = callBackRecipeId;
+        this.callBackProductId = callBackProductId;
     }
 
 }
