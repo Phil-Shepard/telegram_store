@@ -28,11 +28,13 @@ public class TelegramBot extends TelegramLongPollingBot implements Bot {
     private final BotConfig botConfig;
     private final BotLogic botLogic;
     private final ProductService productService;
+//    private final ParserPageService parserPageService;
 
     public TelegramBot(BotConfig botConfig, BotLogic botLogic, ProductService productService) {
         this.botConfig = botConfig;
         this.botLogic = botLogic;
         this.productService = productService;
+//        this.parserPageService = parserPageService;
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start", "Это телеграмм бот товаров."));
         listOfCommands.add(new BotCommand("/products", "Перейти в каталог товаров."));
@@ -48,6 +50,11 @@ public class TelegramBot extends TelegramLongPollingBot implements Bot {
     }
     @Override
     public void onUpdateReceived(Update update) {
+//        try {
+//            parserPageService.getAllProducts();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         if (productService.getAll().isEmpty()) {
                 productService.AddProducts();
         }

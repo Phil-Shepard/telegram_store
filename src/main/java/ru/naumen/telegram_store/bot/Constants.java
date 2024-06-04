@@ -9,6 +9,7 @@ public class Constants {
     public static final String COMMAND_HELP = "/help";
     public static final String COMMAND_PRODUCTS = "/products";
     public static final String COMMAND_PRODUCTS_LIST = "/products_list";
+    public static final String COMMAND_DELETE = "/delete";
     public static final String HELP = """
             Справка о доступных командах:
             /products

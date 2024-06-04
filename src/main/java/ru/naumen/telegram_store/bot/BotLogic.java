@@ -39,13 +39,16 @@ public class BotLogic {
                 return botMessageCreator.createMessageNamesProducts(chatId);
             }
             case COMMAND_EXIT -> {
-                return botMessageCreator.createMessageDeleteButtons(chatId);
+                return botMessageCreator.createMessageExit(chatId);
             }
             case COMMAND_HELP -> {
                 return botMessageCreator.createMessageAccessButtons(chatId);
             }
             case COMMAND_PRODUCTS_LIST -> {
                 return botMessageCreator.createMessageListProducts(chatId);
+            }
+            case COMMAND_DELETE -> {
+                return botMessageCreator.createMessageDelete(chatId);
             }
             default -> {
                 for(Product product: productService.getAll()){
@@ -56,7 +59,9 @@ public class BotLogic {
                 if ((messageText.split(" ")[0] + " " + messageText.split(" ")[1]).equals("Добавить продукт")){
                     productListService.addProduct(new ProductsList(chatId, messageFromUser.getUserName(),
                             productService.getProductNameById(Long.valueOf(messageFromUser.getMessage().split(" ")[2])),
-                            productService.getProductPriceById(Long.valueOf(messageFromUser.getMessage().split(" ")[2]))));
+                            Long.valueOf(1),
+                            productService.getProductPriceById(Long.valueOf(messageFromUser.getMessage().split(" ")[2]))),
+                            chatId);
                     return botMessageCreator.addProductInList(chatId);
                 }
                 return botMessageCreator.createMessageNotFoundCommand(chatId);

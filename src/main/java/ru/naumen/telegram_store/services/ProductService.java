@@ -19,6 +19,10 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+//    public Optional<Product> getProductByName(String name) {
+//        return productRepository.find;
+//    }
+
     public String getProductNameById(Long id) {
         return productRepository.findById(id).get().getName();
     }
@@ -30,12 +34,12 @@ public class ProductService {
 
     public void AddProducts() {
         List<Product> products = Arrays.asList(
-                new Product("Сметана", "вкусная сметана".getBytes(), Long.valueOf(123), Long.valueOf(2)),
-                new Product("Лук", "вкусный лук".getBytes(), Long.valueOf(213), Long.valueOf(42)),
-                new Product("Чай", "вкусный чай".getBytes(), Long.valueOf(6546), Long.valueOf(312)),
-                new Product("Горох", "вкусный горох".getBytes(), Long.valueOf(213132), Long.valueOf(312132)),
-                new Product("Помидоры", "вкусные помидоры".getBytes(), Long.valueOf(342), Long.valueOf(31212)),
-                new Product("Огурцы", "вкусные огурцы".getBytes(), Long.valueOf(43), Long.valueOf(25))
+                new Product("Сметана", "вкусная сметана".getBytes(), Long.valueOf(90), Long.valueOf(20)),
+                new Product("Лук", "вкусный лук".getBytes(), Long.valueOf(30), Long.valueOf(40)),
+                new Product("Чай", "вкусный чай".getBytes(), Long.valueOf(100), Long.valueOf(50)),
+                new Product("Горох", "вкусный горох".getBytes(), Long.valueOf(20), Long.valueOf(100)),
+                new Product("Помидоры", "вкусные помидоры".getBytes(), Long.valueOf(150), Long.valueOf(100)),
+                new Product("Огурцы", "вкусные огурцы".getBytes(), Long.valueOf(150), Long.valueOf(25))
         );
         productRepository.saveAll(products);
 

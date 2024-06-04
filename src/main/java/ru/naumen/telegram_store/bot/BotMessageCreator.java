@@ -40,8 +40,14 @@ public class BotMessageCreator {
     /**
      * Создается сообщение для пользователя с текстом о закрытии каталога товаров
      */
-    public MessageToUser createMessageDeleteButtons(long chatId) {
+    public MessageToUser createMessageExit(long chatId) {
         String answer = "Вы закрыли каталог товаров";
+        return new MessageToUser(chatId, answer,"false");
+    }
+
+    public MessageToUser createMessageDelete(long chatId) throws IOException {
+        productListService.deleteUserProducts(chatId);
+        String answer = "Ваш список товаров очищен";
         return new MessageToUser(chatId, answer,"false");
     }
 
@@ -88,6 +94,8 @@ public class BotMessageCreator {
                     + "\n"
             + "\n";
         }
+        if (answer.equals(""))
+            answer = "Ваш список товаров пуст";
         return new MessageToUser(chatId, answer, "false");
     }
 }

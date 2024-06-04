@@ -21,14 +21,18 @@ public class ProductsList {
     @Column(name = "name_product")
     private String name_product;
 
+    @Column(name = "price")
+    private Long price;
+
     @Column(name = "quantity")
     private Long quantity;
 
-    public ProductsList(Long userId, String name, String name_product, Long quantity) {
+    public ProductsList(Long userId, String name, String name_product, Long quantity, Long price) {
         this.userId = userId;
         this.name = name;
         this.name_product = name_product;
         this.quantity = quantity;
+        this.price = price;
     }
 
     public ProductsList() {
