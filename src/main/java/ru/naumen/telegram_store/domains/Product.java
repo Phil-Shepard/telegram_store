@@ -1,5 +1,7 @@
 package ru.naumen.telegram_store.domains;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -32,5 +34,17 @@ public class Product {
 
     public Product() {
 
+    }
+
+    @JsonCreator
+    public Product(
+            @JsonProperty("name") String name,
+            @JsonProperty("description") String description,
+            @JsonProperty("price") Long price,
+            @JsonProperty("quantity") Long quantity) {
+        this.name = name;
+        this.description = description.getBytes(); // Convert description to byte[]
+        this.price = price;
+        this.quantity = quantity;
     }
 }

@@ -33,6 +33,8 @@ public class ProductService {
 
 
     public void AddProducts() {
+        ParserJSON parser = new ParserJSON();
+        List<Product> products1 = parser.parseProducts("C:\\Users\\Phil_\\IdeaProjects\\telegram_store\\telegram_store\\src\\main\\resources\\products.json");
         List<Product> products = Arrays.asList(
                 new Product("Сметана", "вкусная сметана".getBytes(), Long.valueOf(90), Long.valueOf(20)),
                 new Product("Лук", "вкусный лук".getBytes(), Long.valueOf(30), Long.valueOf(40)),
@@ -41,7 +43,7 @@ public class ProductService {
                 new Product("Помидоры", "вкусные помидоры".getBytes(), Long.valueOf(150), Long.valueOf(100)),
                 new Product("Огурцы", "вкусные огурцы".getBytes(), Long.valueOf(150), Long.valueOf(25))
         );
-        productRepository.saveAll(products);
+        productRepository.saveAll(products1);
 
     }
 

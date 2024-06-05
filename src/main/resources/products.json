@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "name": "Чай Lipton",
+      "description": "вкусный бодрящий чай со вкусом лимона",
+      "price": 90,
+      "quantity": 20
+    },
+    {
+      "name": "Чипсы Lay's",
+      "description": "чипсы lay's с крабом 140 грамм",
+      "price": 140,
+      "quantity": 40
+    },
+    {
+      "name": "Шоколад Aplen Gold",
+      "description": "шоколад молочный 100 грамм",
+      "price": 60,
+      "quantity": 50
+    },
+    {
+      "name": "Пряники",
+      "description": "вкусные пряники",
+      "price": 50,
+      "quantity": 100
+    },
+    {
+      "name": "Помидоры",
+      "description": "вкусные помидоры",
+      "price": 150,
+      "quantity": 100
+    },
+    {
+      "name": "Огурцы",
+      "description": "вкусные огурцы",
+      "price": 150,
+      "quantity": 25
+    }
+  ]
+}
