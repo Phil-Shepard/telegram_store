@@ -2,10 +2,12 @@ package ru.naumen.telegram_store.bot;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.naumen.telegram_store.domains.Order;
 import ru.naumen.telegram_store.domains.Product;
 import ru.naumen.telegram_store.domains.ProductsList;
 import ru.naumen.telegram_store.domains.message.MessageFromUser;
 import ru.naumen.telegram_store.domains.message.MessageToUser;
+import ru.naumen.telegram_store.services.OrderService;
 import ru.naumen.telegram_store.services.ProductListService;
 import ru.naumen.telegram_store.services.ProductService;
 
@@ -18,7 +20,7 @@ public class BotLogic {
     private final BotMessageCreator botMessageCreator;
     private final ProductService productService;
     private final ProductListService productListService;
-//    private final ProductListService productService;
+    private final OrderService orderService;
 
     /**
      * Точка входа, куда будут поступать сообщения от пользователей. Отсюда будет идти вся новая логика.
@@ -59,7 +61,6 @@ public class BotLogic {
                 if ((messageText.split(" ")[0] + " " + messageText.split(" ")[1]).equals("Добавить продукт")){
                     productListService.addProduct(new ProductsList(chatId, messageFromUser.getUserName(),
                             productService.getProductNameById(Long.valueOf(messageFromUser.getMessage().split(" ")[2])),
-                            Long.valueOf(1),
                             productService.getProductPriceById(Long.valueOf(messageFromUser.getMessage().split(" ")[2]))),
                             chatId);
                     return botMessageCreator.addProductInList(chatId);

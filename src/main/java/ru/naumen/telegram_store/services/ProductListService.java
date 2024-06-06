@@ -9,6 +9,7 @@ import ru.naumen.telegram_store.repositories.ProductRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -17,12 +18,12 @@ public class ProductListService {
     private final ProductRepository productRepository;
 
     public void addProduct(ProductsList productsList,long userId) throws IOException {
-        for (ProductsList productsList1 : productListRepository.findAll()) {
-            if (productsList1.getName_product().equals(productsList.getName_product())
-                    && productsList1.getUserId().equals(userId)) {
-                return;
-            }
-        }
+//        for (ProductsList productsList1 : productListRepository.findAll()) {
+//            if (productsList1.getName_product().equals(productsList.getName_product())
+//                    && productsList1.getUserId().equals(userId)) {
+//                return;
+//            }
+//        }
         productListRepository.save(productsList);
     }
 
@@ -32,6 +33,16 @@ public class ProductListService {
                 productListRepository.delete(product);
             }
         }
+    }
+
+    public ArrayList<ProductsList> getProductsListByUserId(long userId) throws IOException {
+        ArrayList<ProductsList> products = new ArrayList<>();
+        for (ProductsList product : productListRepository.findAll()) {
+            if (product.getUserId().equals(userId)) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 
     public ArrayList<Long> getAddNumbersProducts(Long userId) throws IOException {
@@ -61,14 +72,4 @@ public class ProductListService {
         }
         return namesProducts;
     }
-
-    public Long getQuantityProducts(Long userId, String productName) throws IOException {
-        for (ProductsList productsList : productListRepository.findAll()){
-            if (productsList.getUserId().equals(userId) && productsList.getName_product().equals(productName)) {
-                return productsList.getQuantity();
-            }
-        }
-        return Long.valueOf(1);
-    }
-
 }

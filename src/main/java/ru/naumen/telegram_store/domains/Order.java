@@ -5,11 +5,10 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "product_lists")
-public class ProductsList {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_list_id")
     private Long id;
 
     @Column(name = "user_id")
@@ -18,21 +17,21 @@ public class ProductsList {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "name_product")
-    private String name_product;
+    @Column(name = "description")
+    private byte[] description;
 
     @Column(name = "price")
     private Long price;
 
-
-    public ProductsList(Long userId, String name, String name_product, Long price) {
+    public Order(Long id, Long userId, String name, byte[] description, Long price) {
+        this.id = id;
         this.userId = userId;
         this.name = name;
-        this.name_product = name_product;
+        this.description = description;
         this.price = price;
     }
 
-    public ProductsList() {
+    public Order() {
 
     }
 }

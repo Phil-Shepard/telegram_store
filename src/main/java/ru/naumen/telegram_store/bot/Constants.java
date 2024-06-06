@@ -12,11 +12,10 @@ public class Constants {
     public static final String COMMAND_DELETE = "/delete";
     public static final String HELP = """
             Справка о доступных командах:
-            /products
-            /products_list
-            /history
-            /delete
-            /exit
+            /products - Выводится список доступных товаров.
+            /products_list - Выводится список добавленных продуктов.
+            /delete - очищается список добавленных продуктов.
+            /exit - Полностью очищаются все данные о пользователе
             /help""";
     public static final String TEXT_START = """
             Доступны следующие команды:

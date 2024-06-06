@@ -22,14 +22,11 @@ public class Product {
     @Column(name = "price")
     private Long price;
 
-    @Column(name = "quantity")
-    private Long quantity;
 
-    public Product(String name, byte[] description, Long price, Long quantity) {
+    public Product(String name, byte[] description, Long price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public Product() {
@@ -40,11 +37,9 @@ public class Product {
     public Product(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
-            @JsonProperty("price") Long price,
-            @JsonProperty("quantity") Long quantity) {
+            @JsonProperty("price") Long price) {
         this.name = name;
-        this.description = description.getBytes(); // Convert description to byte[]
+        this.description = description.getBytes();
         this.price = price;
-        this.quantity = quantity;
     }
 }

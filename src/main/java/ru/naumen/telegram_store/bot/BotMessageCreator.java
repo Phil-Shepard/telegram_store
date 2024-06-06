@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.naumen.telegram_store.domains.Product;
 import ru.naumen.telegram_store.domains.message.MessageToUser;
 import ru.naumen.telegram_store.repositories.ProductListRepository;
+import ru.naumen.telegram_store.services.OrderService;
 import ru.naumen.telegram_store.services.ProductListService;
 import ru.naumen.telegram_store.services.ProductService;
 
@@ -20,6 +21,7 @@ public class BotMessageCreator {
     private final ProductService productService;
     private final ProductListRepository productListRepository;
     private final ProductListService productListService;
+    private final OrderService orderService;
 
     /**
      * Создается сообщение для пользователя с текстом приветствия и списком возможных команд бота.
@@ -40,7 +42,9 @@ public class BotMessageCreator {
     /**
      * Создается сообщение для пользователя с текстом о закрытии каталога товаров
      */
-    public MessageToUser createMessageExit(long chatId) {
+    public MessageToUser createMessageExit(long chatId) throws IOException {
+        orderService.deleteUserProducts(chatId);
+        productListService.deleteUserProducts(chatId);
         String answer = "Вы закрыли каталог товаров";
         return new MessageToUser(chatId, answer,"false");
     }
@@ -78,12 +82,17 @@ public class BotMessageCreator {
         return new MessageToUser(chatId, answer, "add", productId);
     }
 
+    public MessageToUser createMessageAboutOrders(long chatId) throws IOException {
+        return new MessageToUser(chatId, "заказы", "false");
+    }
+
     public MessageToUser addProductInList(long chatId) {
         String answer = "Продукт добавлен";
         return new MessageToUser(chatId, answer, "false");
     }
 
     public MessageToUser createMessageListProducts(Long chatId) throws IOException {
+        orderService.addOrder(chatId);
         ArrayList<Long> productNumbers = productListService.getAddNumbersProducts(chatId);
         String answer = "";
         for (Long productNumber : productNumbers) {
